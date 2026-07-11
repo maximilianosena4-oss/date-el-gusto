@@ -17,7 +17,7 @@ Proyecto realizado como **entrega final del curso de Frontend en TalentoTech**: 
 
 Sitio e-commerce de la rotisería que combina un **menú propio** con un **catálogo demo de API**, y permite:
 
-- Ver el **Menú** con los productos reales del negocio (pollos al spiedo y papas fritas, con fotos propias) y, debajo, **Bebidas y Postres** cargados dinámicamente desde la API DummyJSON (categoría groceries), coherentes con el rubro gastronómico.
+- Ver el **Menú** con los productos reales del negocio (pollos al spiedo y papas fritas, con fotos propias) y, debajo, **Bebidas** (jugos, agua y gaseosas) cargadas dinámicamente desde la API DummyJSON (categoría groceries).
 - **Agregar productos al carrito** desde cualquiera de las dos secciones, editar cantidades, eliminar items y vaciar el carrito, con **total y contador actualizados en tiempo real** y precios formateados en pesos argentinos (ej. $25.000).
 - **Persistencia del carrito en localStorage**: el pedido se mantiene aunque se cierre o actualice la página.
 - Simular la compra con el botón "Finalizar compra".

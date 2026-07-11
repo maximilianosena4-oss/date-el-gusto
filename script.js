@@ -49,10 +49,9 @@ function obtenerProductos() {
             // y excluimos comida de mascotas por las dudas
             const filtrados = datos.products
                 .filter(function (p) {
-                    return /juice|water|soft drinks|ice cream|milk|honey/i.test(p.title) &&
-                           !/dog|cat/i.test(p.title);
+                    return /juice|water|soft.drink/i.test(p.title);
                 })
-                .slice(0, 4)
+                .slice(0, 3)
                 .map(function (p) {
                     return {
                         // id + 1000 evita choque con los ids del menú propio;
