@@ -141,6 +141,14 @@ nav {
 
 
 /* Productos */
+.subtitulo-seccion {
+    font-family: 'Bebas Neue', Arial, sans-serif;
+    font-size: 28px;
+    color: #1a1a1a;
+    text-align: center;
+    margin: 30px 0 20px;
+}
+
 .contenedor-productos {
     display: flex;
     flex-wrap: wrap;

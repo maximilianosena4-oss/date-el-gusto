@@ -6,14 +6,30 @@ const API_URL = 'https://fakestoreapi.com/products';
 // Clave con la que guardamos el carrito en localStorage
 const CLAVE_CARRITO = 'carritoDateElGusto';
 
+// Catálogo real del negocio: ids negativos para no chocar con los ids de la API
+const productosEstaticos = [
+    { id: -1, title: 'Pollo al Spiedo Clásico', price: 25000, image: 'img/pollo-clasico.jpg' },
+    { id: -2, title: 'Pollo al Spiedo Dorado', price: 30000, image: 'img/pollo-dorado.jpg' },
+    { id: -3, title: 'Pollo al Limón', price: 31000, image: 'img/pollo-limon.jpg' },
+    { id: -4, title: 'Papas Fritas', price: 5000, image: 'img/papas-fritas.jpg' }
+];
+
 // Referencias a elementos del DOM que usamos en varias funciones
+const contenedorMenu = document.getElementById('contenedor-menu');
 const contenedorProductos = document.getElementById('contenedor-productos');
 const listaCarrito = document.getElementById('lista-carrito');
 const totalCarrito = document.getElementById('total-carrito');
 const contadorCarrito = document.getElementById('contador-carrito');
 const mensajeUsuario = document.getElementById('mensaje-usuario');
 
-let productos = [];   // productos traídos de la API
+// Formato de precios en pesos argentinos, sin decimales (ej: $25.000)
+function formatearPrecio(precio) {
+    return '$' + precio.toLocaleString('es-AR', { maximumFractionDigits: 0 });
+}
+
+// Arranca con el menú propio disponible de inmediato; el fetch a la API
+// agrega el catálogo de demostración cuando llega
+let productos = [...productosEstaticos];
 let carrito = [];     // items agregados: { id, title, price, image, cantidad }
 
 
@@ -30,10 +46,13 @@ function obtenerProductos() {
         .then(function (datos) {
             // Filtramos categorías visualmente neutras: la API es de demostración,
             // no vende pollos al spiedo, así que evitamos mostrar ropa mezclada
-            productos = datos.filter(function (p) {
+            const filtrados = datos.filter(function (p) {
                 return p.category === 'electronics' || p.category === 'jewelery';
             });
-            renderizarProductos(productos);
+            // Se suman al menú propio (no lo reemplazan) para que el carrito
+            // siga encontrando por id los productos de ambas fuentes
+            productos = [...productosEstaticos, ...filtrados];
+            renderizarProductos(filtrados);
         })
         .catch(function (error) {
             // Si la API falla, avisamos al usuario en vez de dejar la sección vacía
@@ -59,7 +78,7 @@ function renderizarProductos(lista) {
             <img src="${producto.image}" alt="Imagen de ${producto.title}">
             <h3>${producto.title}</h3>
             <span class="badge-categoria">${producto.category.toUpperCase()}</span>
-            <p class="precio">$${producto.price.toFixed(2)}</p>
+            <p class="precio">${formatearPrecio(producto.price)}</p>
             <button type="button" class="boton boton-agregar" data-id="${producto.id}">
                 Agregar al carrito
             </button>
@@ -69,13 +88,16 @@ function renderizarProductos(lista) {
     });
 }
 
-// Un solo listener en el contenedor atiende los clicks de todos los botones "Agregar"
-contenedorProductos.addEventListener('click', function (evento) {
+// Delegación de eventos: un listener por contenedor atiende los clicks
+// de todos sus botones "Agregar" (menú propio y catálogo de la API)
+function manejarClickAgregar(evento) {
     if (evento.target.classList.contains('boton-agregar')) {
         const id = Number(evento.target.dataset.id);
         agregarAlCarrito(id);
     }
-});
+}
+contenedorMenu.addEventListener('click', manejarClickAgregar);
+contenedorProductos.addEventListener('click', manejarClickAgregar);
 
 
 // Carrito: altas, bajas, cantidades y total
@@ -158,7 +180,7 @@ function renderizarCarrito() {
         const fila = document.createElement('div');
         fila.className = 'item-carrito';
 
-        const subtotal = (item.price * item.cantidad).toFixed(2);
+        const subtotal = formatearPrecio(item.price * item.cantidad);
 
         fila.innerHTML = `
             <img src="${item.image}" alt="Imagen de ${item.title}">
@@ -168,14 +190,14 @@ function renderizarCarrito() {
                 <span>${item.cantidad}</span>
                 <button type="button" class="boton-cantidad" data-accion="sumar" data-id="${item.id}" aria-label="Sumar una unidad">+</button>
             </div>
-            <p class="item-subtotal">$${subtotal}</p>
+            <p class="item-subtotal">${subtotal}</p>
             <button type="button" class="boton-eliminar" data-accion="eliminar" data-id="${item.id}" aria-label="Eliminar producto">✕</button>
         `;
 
         listaCarrito.appendChild(fila);
     });
 
-    totalCarrito.textContent = '$' + calcularTotal().toFixed(2);
+    totalCarrito.textContent = formatearPrecio(calcularTotal());
 
     const totalUnidades = carrito.reduce(function (total, item) {
         return total + item.cantidad;
@@ -202,9 +224,9 @@ document.getElementById('boton-comprar').addEventListener('click', function () {
         mostrarMensaje('⚠️ El carrito está vacío, agregá productos antes de comprar');
         return;
     }
-    const total = calcularTotal().toFixed(2);
+    const total = formatearPrecio(calcularTotal());
     vaciarCarrito();
-    mostrarMensaje('🎉 ¡Gracias por tu compra! Total: $' + total);
+    mostrarMensaje('🎉 ¡Gracias por tu compra! Total: ' + total);
 });
 
 
