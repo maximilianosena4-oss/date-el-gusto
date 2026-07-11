@@ -46,9 +46,9 @@ function obtenerProductos() {
         .then(function (datos) {
             // Filtramos categorías visualmente neutras: la API es de demostración,
             // no vende pollos al spiedo, así que evitamos mostrar ropa mezclada
-            const filtrados = datos.filter(function (p) {
-                return p.category === 'electronics' || p.category === 'jewelery';
-            });
+            const filtrados = datos
+                .filter(function (p) { return p.category === 'electronics'; })
+                .slice(0, 4);
             // Se suman al menú propio (no lo reemplazan) para que el carrito
             // siga encontrando por id los productos de ambas fuentes
             productos = [...productosEstaticos, ...filtrados];
