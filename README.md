@@ -2,7 +2,7 @@
 
 Sitio web responsive de la rotisería **"Date el Gusto"**, especializada en pollos al spiedo y guarniciones, ubicada en Quilmes, Buenos Aires.
 
-Proyecto realizado como **entrega final del curso de Frontend en TalentoTech**: un e-commerce dinámico e interactivo que consume productos desde una **API REST (Fake Store API)**, los renderiza como cards en el DOM y permite gestionar un **carrito de compras con persistencia en localStorage**. Aplica los conceptos de HTML5 semántico, CSS3, Flexbox, Grid, Bootstrap 5, diseño responsive y JavaScript vistos a lo largo del curso.
+Proyecto realizado como **entrega final del curso de Frontend en TalentoTech**: un e-commerce dinámico e interactivo que consume productos desde una **API REST (DummyJSON, categoría groceries)**, los renderiza como cards en el DOM y permite gestionar un **carrito de compras con persistencia en localStorage**. Aplica los conceptos de HTML5 semántico, CSS3, Flexbox, Grid, Bootstrap 5, diseño responsive y JavaScript vistos a lo largo del curso.
 
 ---
 
@@ -17,7 +17,7 @@ Proyecto realizado como **entrega final del curso de Frontend en TalentoTech**: 
 
 Sitio e-commerce de la rotisería que combina un **menú propio** con un **catálogo demo de API**, y permite:
 
-- Ver el **Menú** con los productos reales del negocio (pollos al spiedo y papas fritas, con fotos propias) y, debajo, **Otros Productos** cargados dinámicamente desde la Fake Store API a modo de catálogo de demostración.
+- Ver el **Menú** con los productos reales del negocio (pollos al spiedo y papas fritas, con fotos propias) y, debajo, **Bebidas y Postres** cargados dinámicamente desde la API DummyJSON (categoría groceries), coherentes con el rubro gastronómico.
 - **Agregar productos al carrito** desde cualquiera de las dos secciones, editar cantidades, eliminar items y vaciar el carrito, con **total y contador actualizados en tiempo real** y precios formateados en pesos argentinos (ej. $25.000).
 - **Persistencia del carrito en localStorage**: el pedido se mantiene aunque se cierre o actualice la página.
 - Simular la compra con el botón "Finalizar compra".
@@ -53,7 +53,7 @@ Sitio e-commerce de la rotisería que combina un **menú propio** con un **catá
 - **Media Queries** para diseño responsive (tablets 992px, móvil 768px y 480px)
 
 ### JavaScript (script.js)
-- **Fetch API**: consumo de la API REST `https://fakestoreapi.com/products` con promesas (`.then` / `.catch`) y manejo de errores
+- **Fetch API**: consumo de la API REST `https://dummyjson.com/products/category/groceries` con promesas (`.then` / `.catch`) y manejo de errores
 - **Manipulación del DOM**: renderizado dinámico de las cards de productos y de los items del carrito (`createElement`, `innerHTML`, `appendChild`)
 - **Eventos**: `addEventListener` con delegación de eventos para los botones de agregar, sumar, restar y eliminar
 - **Carrito de compras**: altas, bajas, modificación de cantidades, subtotales y total dinámico
@@ -159,7 +159,7 @@ Si en algún momento necesitás asociarlo a otra cuenta, entrá a [https://forms
 7. **JavaScript**
    - ✅ script.js enlazado en el HTML
    - ✅ Validación de formulario (campos requeridos + formato de correo)
-   - ✅ Consumo de API REST con fetch (Fake Store API)
+   - ✅ Consumo de API REST con fetch (DummyJSON, categoría groceries)
    - ✅ Productos renderizados como cards con imagen, título y precio
 8. **Carrito de compras dinámico**
    - ✅ Agregar productos desde las cards

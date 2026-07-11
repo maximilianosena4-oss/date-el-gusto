@@ -1,7 +1,7 @@
 // Consumo de la API, renderizado dinámico de productos, carrito de
 // compras con persistencia en localStorage y validación del formulario.
 
-const API_URL = 'https://fakestoreapi.com/products';
+const API_URL = 'https://dummyjson.com/products/category/groceries';
 
 // Clave con la que guardamos el carrito en localStorage
 const CLAVE_CARRITO = 'carritoDateElGusto';
@@ -44,11 +44,26 @@ function obtenerProductos() {
             return respuesta.json();
         })
         .then(function (datos) {
-            // Filtramos categorías visualmente neutras: la API es de demostración,
-            // no vende pollos al spiedo, así que evitamos mostrar ropa mezclada
-            const filtrados = datos
-                .filter(function (p) { return p.category === 'electronics'; })
-                .slice(0, 4);
+            // DummyJSON devuelve { products: [...] }, no un array directo.
+            // Nos quedamos solo con bebidas y postres (coherentes con el rubro)
+            // y excluimos comida de mascotas por las dudas
+            const filtrados = datos.products
+                .filter(function (p) {
+                    return /juice|water|soft drinks|ice cream|milk|honey/i.test(p.title) &&
+                           !/dog|cat/i.test(p.title);
+                })
+                .slice(0, 4)
+                .map(function (p) {
+                    return {
+                        // id + 1000 evita choque con los ids del menú propio;
+                        // el precio USD se convierte a un valor tipo ARS
+                        id: p.id + 1000,
+                        title: p.title,
+                        price: Math.round(p.price * 1500),
+                        image: p.thumbnail,
+                        category: p.category
+                    };
+                });
             // Se suman al menú propio (no lo reemplazan) para que el carrito
             // siga encontrando por id los productos de ambas fuentes
             productos = [...productosEstaticos, ...filtrados];
