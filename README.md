@@ -8,8 +8,8 @@ Proyecto realizado como **entrega final del curso de Frontend en TalentoTech**: 
 
 ## 🌐 Demo
 
-- **Sitio publicado:** [pendiente — pegar URL de GitHub Pages]
-- **Repositorio:** [pendiente — pegar URL del repo]
+- **Sitio publicado:** https://maximilianosena4-oss.github.io/date-el-gusto/
+- **Repositorio:** https://github.com/maximilianosena4-oss/date-el-gusto
 
 ---
 
@@ -155,7 +155,7 @@ Si en algún momento necesitás asociarlo a otra cuenta, entrá a [https://forms
 5. **Contenido multimedia y navegación**
    - ✅ Video integrado y lista de navegación desordenada con enlaces internos
 6. **Subida del proyecto**
-   - ⏳ Pendiente: pegar URL de GitHub Pages y URL del repositorio en la sección Demo
+   - ✅ Publicado en GitHub Pages con URL funcional
 7. **JavaScript**
    - ✅ script.js enlazado en el HTML
    - ✅ Validación de formulario (campos requeridos + formato de correo)

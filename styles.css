@@ -1,16 +1,10 @@
-/* ========================================
-   DATE EL GUSTO - styles.css
-   Pollos al Spiedo
-   ======================================== */
-
-/* RESET BÁSICO con selector universal (Clase 4) */
+/* Reset y estilos base */
 * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;  /* Clase 6 - modelo de caja */
+    box-sizing: border-box;
 }
 
-/* BODY - Estilos generales (Clase 4-5) */
 body {
     font-family: 'Open Sans', Arial, sans-serif;
     color: #333333;
@@ -19,9 +13,7 @@ body {
 }
 
 
-/* ========================================
-   HEADER (Clase 1, Clase 4-5)
-   ======================================== */
+/* Header */
 header {
     background-color: #c1121f;
     color: #ffffff;
@@ -43,9 +35,7 @@ header p {
 }
 
 
-/* ========================================
-   NAV - Lista desordenada con Flexbox (Clase 1, 7)
-   ======================================== */
+/* Nav */
 nav {
     background-color: #1a1a1a;
     padding: 15px 20px;
@@ -53,8 +43,8 @@ nav {
 }
 
 .menu-nav {
-    list-style: none;       /* Saca las viñetas */
-    display: flex;          /* Clase 6-7 Flexbox */
+    list-style: none;
+    display: flex;
     flex-wrap: wrap;
     justify-content: center;
     gap: 20px;
@@ -62,7 +52,7 @@ nav {
 
 .menu-nav li a {
     color: #ffffff;
-    text-decoration: none;  /* Clase 4 - quita subrayado */
+    text-decoration: none;
     font-weight: 700;
     font-size: 16px;
     text-transform: uppercase;
@@ -70,20 +60,17 @@ nav {
     border-radius: 6px;
 }
 
-/* Pseudoclase :hover (Clase 5) */
 .menu-nav li a:hover {
     background-color: #ffb703;
     color: #1a1a1a;
 }
 
 
-/* ========================================
-   SECCIONES - Estilos generales
-   ======================================== */
+/* Secciones */
 .seccion {
     padding: 60px 20px;
     max-width: 1200px;
-    margin: 0 auto;          /* margin: auto centra (Clase 6) */
+    margin: 0 auto;
 }
 
 .seccion h2 {
@@ -118,9 +105,7 @@ nav {
 }
 
 
-/* ========================================
-   HERO - Background imagen (Clase 5)
-   ======================================== */
+/* Hero */
 .hero {
     background-image: url('img/hero-pollo-papas.jpg');
     background-size: cover;
@@ -137,8 +122,9 @@ nav {
     font-family: 'Bebas Neue', Arial, sans-serif;
     font-size: 56px;
     color: #ffffff;
-    background-color: rgba(0, 0, 0, 0.6); /* rgba con transparencia (Clase 5) */
-    display: inline-block;                 /* Clase 4 */
+    /* overlay oscuro para que el texto sea legible sobre la foto de fondo */
+    background-color: rgba(0, 0, 0, 0.6);
+    display: inline-block;
     padding: 15px 30px;
     border-radius: 8px;
     margin-bottom: 20px;
@@ -154,35 +140,35 @@ nav {
 }
 
 
-/* ========================================
-   PRODUCTOS - FLEXBOX (Clase 6-7)
-   ======================================== */
+/* Productos */
 .contenedor-productos {
-    display: flex;             /* Activa Flexbox */
-    flex-wrap: wrap;           /* Permite saltos de línea */
-    justify-content: center;   /* Centra los items */
-    gap: 25px;                 /* Separación entre cards */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 25px;
 }
 
 .card-producto {
     background-color: #ffffff;
-    width: 300px;              /* Ancho fijo de cada card */
+    width: 300px;
     border: 2px solid #eeeeee;
     border-radius: 12px;
     padding: 0;
-    overflow: hidden;          /* Clase 6 - oculta lo que sobresale */
+    overflow: hidden;
 }
 
 .card-producto img {
     width: 100%;
     height: 220px;
     display: block;
-    object-fit: contain;       /* Las fotos de la API no se deforman */
+    /* contain evita que las fotos de la API, con relaciones de aspecto
+       distintas entre sí, se recorten o deformen dentro de la card */
+    object-fit: contain;
     background-color: #ffffff;
     padding: 15px;
 }
 
-/* Mensaje mientras fetch trae los productos (lo inserta script.js) */
+/* Estado de carga de la sección Productos */
 .mensaje-carga {
     text-align: center;
     font-size: 17px;
@@ -191,7 +177,7 @@ nav {
     padding: 30px 0;
 }
 
-/* Badge de categoría en cada card (lo inserta script.js) */
+/* Badge de categoría de cada producto */
 .badge-categoria {
     display: inline-block;
     background-color: #ffb703;
@@ -234,9 +220,7 @@ nav {
 }
 
 
-/* ========================================
-   VIDEO / NOSOTROS
-   ======================================== */
+/* Video */
 .contenedor-video {
     display: flex;
     justify-content: center;
@@ -264,12 +248,10 @@ nav {
 }
 
 
-/* ========================================
-   RESEÑAS - GRID (Clase 7)
-   ======================================== */
+/* Reseñas */
 .contenedor-resenas {
-    display: grid;                              /* Activa Grid */
-    grid-template-columns: 1fr 1fr 1fr;         /* 3 columnas iguales */
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
     gap: 25px;
 }
 
@@ -300,9 +282,7 @@ nav {
 }
 
 
-/* ========================================
-   CARRITO DE COMPRAS (Proyecto Final)
-   ======================================== */
+/* Carrito */
 .seccion-carrito {
     background-color: #ffffff;
     max-width: 100%;
@@ -321,7 +301,6 @@ nav {
     padding: 20px 0;
 }
 
-/* Cada fila del carrito se organiza con Flexbox (Clase 7) */
 .item-carrito {
     display: flex;
     align-items: center;
@@ -343,7 +322,8 @@ nav {
 }
 
 .item-carrito .item-nombre {
-    flex: 1;                   /* El nombre ocupa el espacio libre */
+    /* ocupa el espacio libre entre la imagen y los controles de cantidad */
+    flex: 1;
     font-size: 14px;
     font-weight: 600;
     color: #333333;
@@ -424,11 +404,7 @@ nav {
 }
 
 
-/* ========================================
-   MENSAJES AL USUARIO Y ERRORES DE FORMULARIO
-   ======================================== */
-
-/* Aviso flotante que muestra script.js (agregado, eliminado, compra) */
+/* Mensajes y errores de formulario */
 .mensaje-usuario {
     position: fixed;
     bottom: 25px;
@@ -440,7 +416,7 @@ nav {
     border-left: 5px solid #ffb703;
     font-size: 15px;
     font-weight: 600;
-    opacity: 0;                /* Oculto por defecto */
+    opacity: 0;
     visibility: hidden;
     z-index: 100;
     max-width: 320px;
@@ -451,7 +427,6 @@ nav {
     visibility: visible;
 }
 
-/* Texto de error debajo de cada campo del formulario */
 .error-campo {
     display: block;
     color: #c1121f;
@@ -463,9 +438,7 @@ nav {
 }
 
 
-/* ========================================
-   CONTACTO - FLEXBOX para 2 columnas
-   ======================================== */
+/* Contacto */
 .seccion-contacto {
     background-color: #fff8e7;
     max-width: 100%;
@@ -508,9 +481,7 @@ nav {
 }
 
 
-/* ========================================
-   FORMULARIO (Clase 3, 4-5)
-   ======================================== */
+/* Formulario */
 .formulario {
     flex: 1;
     min-width: 300px;
@@ -561,9 +532,7 @@ nav {
 }
 
 
-/* ========================================
-   BOTONES (Clase 4-5)
-   ======================================== */
+/* Botones */
 .boton {
     display: inline-block;
     background-color: #c1121f;
@@ -595,9 +564,7 @@ nav {
 }
 
 
-/* ========================================
-   FOOTER
-   ======================================== */
+/* Footer */
 footer {
     background-color: #1a1a1a;
     color: #ffffff;
@@ -618,11 +585,9 @@ footer p:last-child {
 }
 
 
-/* ========================================
-   RESPONSIVE - MEDIA QUERIES (Clase 7)
-   ======================================== */
+/* Media queries */
 
-/* TABLETS - hasta 992px */
+/* Tablets */
 @media (max-width: 992px) {
 
     header h1 {
@@ -637,14 +602,13 @@ footer p:last-child {
         font-size: 36px;
     }
 
-    /* Reseñas: 2 columnas en tablets */
     .contenedor-resenas {
         grid-template-columns: 1fr 1fr;
     }
 }
 
 
-/* MOBILE - hasta 768px */
+/* Mobile */
 @media (max-width: 768px) {
 
     header {
@@ -659,7 +623,6 @@ footer p:last-child {
         font-size: 16px;
     }
 
-    /* Nav en columna en mobile */
     .menu-nav {
         flex-direction: column;
         gap: 8px;
@@ -691,18 +654,15 @@ footer p:last-child {
         font-size: 32px;
     }
 
-    /* Productos: card más angosta */
     .card-producto {
         width: 100%;
         max-width: 350px;
     }
 
-    /* Reseñas: 1 columna en mobile */
     .contenedor-resenas {
         grid-template-columns: 1fr;
     }
 
-    /* Carrito: las filas se apilan en mobile */
     .item-carrito {
         flex-wrap: wrap;
         justify-content: center;
@@ -718,7 +678,6 @@ footer p:last-child {
         min-width: auto;
     }
 
-    /* Contacto: una sola columna */
     .contenedor-contacto {
         flex-direction: column;
     }
@@ -738,7 +697,7 @@ footer p:last-child {
 }
 
 
-/* MOBILE CHICO - hasta 480px */
+/* Mobile chico */
 @media (max-width: 480px) {
 
     header h1 {

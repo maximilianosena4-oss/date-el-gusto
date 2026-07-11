@@ -1,9 +1,6 @@
-/* ============================================================
-   DATE EL GUSTO - script.js
-   Proyecto Final: Fetch API + DOM + Carrito con localStorage
-   ============================================================ */
+// Consumo de la API, renderizado dinámico de productos, carrito de
+// compras con persistencia en localStorage y validación del formulario.
 
-// URL de la API REST vista en clase (Clases 12-14)
 const API_URL = 'https://fakestoreapi.com/products';
 
 // Clave con la que guardamos el carrito en localStorage
@@ -16,17 +13,13 @@ const totalCarrito = document.getElementById('total-carrito');
 const contadorCarrito = document.getElementById('contador-carrito');
 const mensajeUsuario = document.getElementById('mensaje-usuario');
 
-// Estado de la aplicación
 let productos = [];   // productos traídos de la API
 let carrito = [];     // items agregados: { id, title, price, image, cantidad }
 
 
-/* ============================================================
-   1. CONSUMO DE LA API REST CON FETCH (punto 7 de la consigna)
-   ============================================================ */
+// Consumo de la API con Fetch
 
 function obtenerProductos() {
-    // fetch devuelve una promesa: primero convertimos la respuesta a JSON
     fetch(API_URL)
         .then(function (respuesta) {
             if (!respuesta.ok) {
@@ -51,18 +44,15 @@ function obtenerProductos() {
 }
 
 
-/* ============================================================
-   2. RENDERIZADO DINÁMICO DE CARDS (manipulación del DOM)
-   ============================================================ */
+// Renderizado dinámico de las cards de producto
 
 function renderizarProductos(lista) {
-    // Vaciamos el contenedor (saca el mensaje "Cargando productos...")
+    // innerHTML='' también borra el mensaje "Cargando productos..." del HTML inicial
     contenedorProductos.innerHTML = '';
 
     lista.forEach(function (producto) {
-        // Creamos la card con la misma estructura que tenía el HTML estático
-        // Bootstrap: shadow-sm agrega sombra suave como utilidad visual complementaria
         const card = document.createElement('article');
+        // shadow-sm es una utilidad de Bootstrap que agrega sombra suave a la card
         card.className = 'card-producto shadow-sm';
 
         card.innerHTML = `
@@ -88,21 +78,16 @@ contenedorProductos.addEventListener('click', function (evento) {
 });
 
 
-/* ============================================================
-   3. CARRITO: ALTAS, BAJAS, CANTIDADES Y TOTAL (puntos 8 y 9)
-   ============================================================ */
+// Carrito: altas, bajas, cantidades y total
 
 function agregarAlCarrito(id) {
-    // Buscamos si el producto ya está en el carrito
     const itemExistente = carrito.find(function (item) {
         return item.id === id;
     });
 
     if (itemExistente) {
-        // Si ya estaba, solo sumamos cantidad
         itemExistente.cantidad++;
     } else {
-        // Si no estaba, lo buscamos en los productos de la API y lo agregamos
         const producto = productos.find(function (p) {
             return p.id === id;
         });
@@ -128,7 +113,6 @@ function cambiarCantidad(id, cambio) {
 
     item.cantidad += cambio;
 
-    // Si la cantidad llega a 0, el producto se elimina del carrito
     if (item.cantidad <= 0) {
         eliminarDelCarrito(id);
         return;
@@ -161,9 +145,7 @@ function calcularTotal() {
 }
 
 
-/* ============================================================
-   4. RENDERIZADO DEL CARRITO Y CONTADOR EN TIEMPO REAL
-   ============================================================ */
+// Renderizado del carrito y el contador
 
 function renderizarCarrito() {
     listaCarrito.innerHTML = '';
@@ -193,10 +175,8 @@ function renderizarCarrito() {
         listaCarrito.appendChild(fila);
     });
 
-    // Total dinámico: se recalcula en cada cambio del carrito
     totalCarrito.textContent = '$' + calcularTotal().toFixed(2);
 
-    // Contador del nav: suma las cantidades de todos los items
     const totalUnidades = carrito.reduce(function (total, item) {
         return total + item.cantidad;
     }, 0);
@@ -215,7 +195,6 @@ listaCarrito.addEventListener('click', function (evento) {
     if (accion === 'eliminar') eliminarDelCarrito(id);
 });
 
-// Botones de acciones generales del carrito
 document.getElementById('boton-vaciar').addEventListener('click', vaciarCarrito);
 
 document.getElementById('boton-comprar').addEventListener('click', function () {
@@ -229,9 +208,7 @@ document.getElementById('boton-comprar').addEventListener('click', function () {
 });
 
 
-/* ============================================================
-   5. PERSISTENCIA CON localStorage (punto 8 de la consigna)
-   ============================================================ */
+// Persistencia en localStorage
 
 function guardarCarrito() {
     // localStorage solo guarda texto: convertimos el array a JSON
@@ -252,9 +229,7 @@ function cargarCarrito() {
 }
 
 
-/* ============================================================
-   6. MENSAJES AL USUARIO
-   ============================================================ */
+// Mensajes al usuario
 
 let temporizadorMensaje;
 
@@ -270,9 +245,7 @@ function mostrarMensaje(texto) {
 }
 
 
-/* ============================================================
-   7. VALIDACIÓN DEL FORMULARIO DE CONTACTO (punto 7)
-   ============================================================ */
+// Validación del formulario de contacto
 
 const formulario = document.getElementById('formulario-contacto');
 
@@ -283,12 +256,10 @@ formulario.addEventListener('submit', function (evento) {
 
     let formularioValido = true;
 
-    // Limpiamos errores de un intento anterior
     document.getElementById('error-nombre').textContent = '';
     document.getElementById('error-email').textContent = '';
     document.getElementById('error-mensaje').textContent = '';
 
-    // Campo requerido: nombre
     if (nombre.value.trim() === '') {
         document.getElementById('error-nombre').textContent = 'Por favor, ingresá tu nombre.';
         formularioValido = false;
@@ -301,7 +272,6 @@ formulario.addEventListener('submit', function (evento) {
         formularioValido = false;
     }
 
-    // Campo requerido: mensaje
     if (mensaje.value.trim() === '') {
         document.getElementById('error-mensaje').textContent = 'Contanos qué necesitás.';
         formularioValido = false;
@@ -315,11 +285,7 @@ formulario.addEventListener('submit', function (evento) {
 });
 
 
-/* ============================================================
-   8. INICIALIZACIÓN
-   ============================================================ */
-
-// Al cargar la página: recuperamos el carrito guardado y pedimos los productos
+// Inicialización: recuperar carrito y cargar productos
 cargarCarrito();
 renderizarCarrito();
 obtenerProductos();
